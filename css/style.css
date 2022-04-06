@@ -49,6 +49,9 @@ body{
     padding-right: 7px;
     position: absolute;
 }
+.escondido{
+    display: none;
+}
 @media (max-width: 414px){
     
     .imagens{
