@@ -3,7 +3,6 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
 }
 * {
     padding: 0;
@@ -19,6 +18,9 @@ body{
     letter-spacing: -0.004em;
 
     color: #75B79E;
+
+    margin-bottom: 47px;
+    margin-top: 40px;
 }
 .container{
 
@@ -27,7 +29,7 @@ body{
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .imagens{
     width: 117px;
@@ -46,4 +48,28 @@ body{
     padding-bottom: 22px;
     padding-right: 7px;
     position: absolute;
+}
+@media (max-width: 414px){
+    
+    .imagens{
+        margin-bottom: 34px;
+    }
+    .container{
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .titulo{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 42px;
+        text-align: center;
+        letter-spacing: -0.004em;
+
+        color: #75B79E;
+    }
+    
 }
