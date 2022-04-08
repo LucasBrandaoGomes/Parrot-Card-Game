@@ -30,6 +30,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    perspective: 1000px;
 }
 .imagens{
     width: 117px;
@@ -39,8 +40,19 @@ body{
     box-sizing: border-box;
     border-radius: 5px;
     position: relative;
+    transform-style: preserve-3d;
+    transition: transform .5s;
+    transform: scale(1);
 }
-.frente, .verso{
+.imagens:hover{
+    cursor: pointer;
+    transform: scale(1.07);
+    transition: transform .2s;
+}
+.imagens.virar {
+  transform: rotateY(180deg);
+}
+.frente, .verso {
     width: 100%;
     height: 100%;
     padding-left: 10px;
@@ -48,8 +60,15 @@ body{
     padding-bottom: 22px;
     padding-right: 7px;
     position: absolute;
-}
+    backface-visibility: hidden;
 
+}
+.imagens.virar {
+  transform: rotateY(180deg);
+}
+.verso {
+  transform: rotateY(180deg);
+}
 .escondido{
     display: none;
 }
