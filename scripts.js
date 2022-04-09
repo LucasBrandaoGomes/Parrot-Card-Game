@@ -105,27 +105,43 @@ function virarCarta(carta) {
   }else{
       segundaCarta=carta;
       temCartaVirada=false;//ao final do bloco, independende do que acontecer, essa variável volta a ser false para uma p´roxima jogada//
+
+      //estando então dentro do bloco do else, existem duas cartas viradas, e por isso é hora de chamar a verificação//
+        verificaçãoDasCartas()  
   }
-  
-  setTimeout(verificaçãoDasCartas, 5000);
 }
+
+const paresVirados=[]; //lista para receber em ordem os pares virados, por ela será indicado quando o jogo acaba)//
+                      //o jogo acaba quando o número de elementos dessa lista foir igual ao de cartas escolhidos pelo usuário//
+
 function verificaçãoDasCartas(){
-    if (primeiraCarta.innerHTML===segundaCarta.innerHTML){
+    if (primeiraCarta.innerHTML === segundaCarta.innerHTML){
+       
         //remover o onclick dessas cartas//
-        
         primeiraCarta.removeEventListener('click', virarCarta);
         segundaCarta.removeEventListener('click', virarCarta);
-
-        contadorJogadas++//contar uma jogada - um par de cartas//
-        console.log(contadorJogadas);
+        
+        paresVirados.push(primeiraCarta.innerHTML);
+        paresVirados.push(segundaCarta.innerHTML);
+        
+        contadorJogadas++ //contar uma jogada - um par de cartas//
+        
+        setTimeout(finalizarJogo, 1000);
     }else{
         setTimeout(desvirarCartas, 1000);
-        contadorJogadas++//contar uma jogada - um par de cartas//
-        console.log(contadorJogadas);
+        contadorJogadas++ //contar uma jogada - um par de cartas//    
     }
 }
 
 function desvirarCartas(){
     primeiraCarta.classList.remove('virar');
     segundaCarta.classList.remove('virar');
+
 }
+
+function finalizarJogo(){
+    if (paresVirados.length === jogo){
+        alert(`PARABÉNS! Você venceu o PARROT em ${contadorJogadas} jogadas!`);
+    }
+}
+
