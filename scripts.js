@@ -126,7 +126,6 @@ function verificaçãoDasCartas(){
         
         contadorJogadas++ //contar uma jogada - um par de cartas//
         
-        setTimeout(finalizarJogo, 1000);
     }else{
         setTimeout(desvirarCartas, 1000);
         contadorJogadas++ //contar uma jogada - um par de cartas//    
@@ -140,8 +139,26 @@ function desvirarCartas(){
 }
 
 function finalizarJogo(){
-    if (paresVirados.length === jogo){
-        alert(`PARABÉNS! Você venceu o PARROT em ${contadorJogadas} jogadas!`);
+    alert(`PARABÉNS! Você venceu o PARROT com ${contadorJogadas} jogadas no tempo de ${tempo} segundos!`);
+}
+
+// funções referentes ao relogio//
+
+let tempo = 0;
+let idInterval;
+function contarTempo() {
+
+    idInterval = setInterval(incrementarTempo, 500);
+}
+
+function incrementarTempo() {
+    tempo++;
+    document.querySelector(".contador").innerHTML = tempo;
+    if (paresVirados.length === jogo) {
+        clearInterval(idInterval);
+        setTimeout(finalizarJogo, 1000);
     }
 }
+
+contarTempo();
 
