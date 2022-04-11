@@ -1,12 +1,4 @@
-alert("Bem Vinde ao PARROT CARD GAMES - JOGO DA MEMÓRIA");
-let jogo = Number(prompt("Com quantas cartas deseja jogar? Escolha um número par entre 4 e 14 cartas"));
-while ((jogo>14) || (jogo%2 !== 0)){
-        jogo = Number(prompt("Com quantas cartas deseja jogar? Escolha um número par entre 4 e 14 cartas"));
-}
-
-function comparador() { 
-	return Math.random() - 0.5; 
-}
+/* Lista com as conteiners de cada carta frente/verso*/
 
 const cartasParaAparecer = [
 `<div class="imagens" onclick="virarCarta(this)">
@@ -66,8 +58,11 @@ const cartasParaAparecer = [
     <img class="verso" src="img/unicornparrot.gif">
 </div>`]
 
-const cartas = document.querySelector(".container");
+/* funções para embaralhar cartas */
 
+function comparador() { 
+	return Math.random() - 0.5; 
+}
 function cartasEmbaralhadas(){
 
     cartas.innerHTML="";
@@ -82,19 +77,22 @@ function cartasEmbaralhadas(){
         cartas.innerHTML+=`${embaralhadas[j]}`;
     }
 }
-cartasEmbaralhadas()
+/* Definindo variáveis globais */
 
+const cartas = document.querySelector(".container");
 const carta = document.querySelectorAll(".imagens")
 let contadorJogadas=0;
-
-//varíável para guardar se existe ou não cartas viradas//
-let temCartaVirada = false;
+let temCartaVirada = false; //varíável para guardar se existe ou não cartas viradas//
 
 //variáveis para guardar qual carta foi virada primeiro e segundo//
 let primeiraCarta;
 let segundaCarta;
 
+let tempo = 0; //variável para funções  do relógio
+let idInterval;//variavél para funções do relógio
+
 //função que vai verificar se existe carta virada ou nãoo e atribuir os valores as variaveis primeira e segundCarta//
+//Essa funçaõ é chamada ao clicar em uma carta//
 function virarCarta(carta) {
 
   carta.classList.add('virar');
@@ -115,6 +113,7 @@ const paresVirados=[]; //lista para receber em ordem os pares virados, por ela s
                       //o jogo acaba quando o número de elementos dessa lista foir igual ao de cartas escolhidos pelo usuário//
 
 function verificaçãoDasCartas(){
+
     if (primeiraCarta.innerHTML === segundaCarta.innerHTML){
        
         //remover o onclick dessas cartas//
@@ -133,9 +132,8 @@ function verificaçãoDasCartas(){
 }
 
 function desvirarCartas(){
-    primeiraCarta.classList.remove('virar');
-    segundaCarta.classList.remove('virar');
-
+    primeiraCarta.classList.remove('virar')
+    segundaCarta.classList.remove('virar')
 }
 
 function finalizarJogo(){
@@ -144,21 +142,25 @@ function finalizarJogo(){
 
 // funções referentes ao relogio//
 
-let tempo = 0;
-let idInterval;
+
 function contarTempo() {
-
-    idInterval = setInterval(incrementarTempo, 500);
+    idInterval = setInterval(incrementarTempo, 1000)
 }
-
 function incrementarTempo() {
     tempo++;
     document.querySelector(".contador").innerHTML = tempo;
     if (paresVirados.length === jogo) {
         clearInterval(idInterval);
-        setTimeout(finalizarJogo, 1000);
+        setTimeout(finalizarJogo, 500);
     }
 }
 
-contarTempo();
+alert("Bem Vinde ao PARROT CARD GAMES - JOGO DA MEMÓRIA");
+let jogo = Number(prompt("Com quantas cartas deseja jogar? Escolha um número par entre 4 e 14 cartas"));
+    while ((jogo>14) || (jogo%2 !== 0)){
+        jogo = Number(prompt("Com quantas cartas deseja jogar? Escolha um número par entre 4 e 14 cartas"));
+    }   
 
+cartasEmbaralhadas()
+
+contarTempo()
